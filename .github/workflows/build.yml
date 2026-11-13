@@ -1,0 +1,76 @@
+name: Build
+
+on:
+  push:
+    branches: [main, master]
+    tags: ['v*']
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    name: Build and test culprit.exe (MSVC x64)
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Work out version string
+        id: ver
+        shell: bash
+        run: |
+          if [[ "$GITHUB_REF" == refs/tags/v* ]]; then
+            echo "version=${GITHUB_REF#refs/tags/v}" >> "$GITHUB_OUTPUT"
+          else
+            echo "version=0.0.0-$(git rev-parse --short HEAD)" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Configure
+        run: cmake -S . -B build -A x64 "-DCULPRIT_VERSION=${{ steps.ver.outputs.version }}"
+
+      - name: Build
+        run: cmake --build build --config Release --parallel
+
+      - name: Test
+        run: ctest --test-dir build -C Release --output-on-failure
+
+      - name: Smoke test
+        shell: bash
+        run: |
+          ./build/Release/culprit.exe --version
+          ./build/Release/culprit.exe list
+
+      - name: Package
+        shell: bash
+        run: |
+          mkdir -p dist
+          cp build/Release/culprit.exe dist/
+          cd dist && sha256sum culprit.exe > SHA256SUMS.txt
+          ls -la
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v5
+        with:
+          name: culprit-windows
+          path: dist/*
+
+  release:
+    name: Publish GitHub Release
+    needs: build
+    if: startsWith(github.ref, 'refs/tags/v')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v5
+        with:
+          name: culprit-windows
+          path: dist
+
+      - name: Create release and attach binaries
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            dist/culprit.exe
+            dist/SHA256SUMS.txt
+          generate_release_notes: true

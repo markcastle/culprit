@@ -1,0 +1,10 @@
+build/
+out/
+dist/
+.vs/
+CMakeSettings.json
+CMakeUserPresets.json
+*.exe
+*.obj
+*.pdb
+*.ilk
