@@ -21,7 +21,7 @@ static void usage() {
         "  culprit track on        record history in the background, starting at sign-in\n"
         "  culprit track off       stop recording and remove the sign-in task\n"
         "  culprit track status\n\n"
-        "In the live view:  Up/Down select   Enter details   T process tree   K kill\n"
+        "In the live view:  Up/Down select   D (or Enter) details   T process tree   K kill\n"
         "                   H 1h/24h impact   S sort   Q quit\n\n"
         "History lives in %%LOCALAPPDATA%%\\Culprit. Nothing leaves this machine.\n",
         CULPRIT_VERSION);

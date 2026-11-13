@@ -346,7 +346,7 @@ struct App {
             if (cells(text) + cells(imp) > W) { text = clip(text, W); imp.clear(); }
             add(std::string(sel ? SEL : "") + text + impactColor(g.impact) + imp + (sel ? " " : "") + RST);
         }
-        footer("\xE2\x86\x91\xE2\x86\x93 Select   Enter Details   K Kill   T Tree   H 1h/24h   S Sort   Q Quit");
+        footer("\xE2\x86\x91\xE2\x86\x93 Select   D Details   K Kill   T Tree   H 1h/24h   S Sort   Q Quit");
     }
 
     void field(const std::string& name, const std::string& value, const char* color = "") {
@@ -637,7 +637,7 @@ struct App {
                 else if (vk == VK_NEXT) moveSelection(page);
                 else if (vk == VK_HOME) moveSelection(-100000);
                 else if (vk == VK_END) moveSelection(100000);
-                else if (vk == VK_RETURN) { if (selectedGroup()) { job.reset(); view = View::Detail; } }
+                else if (vk == VK_RETURN || c == L'd') { if (selectedGroup()) { job.reset(); view = View::Detail; } }
                 else if (c == L'k' || vk == VK_DELETE) killFromGroup(View::List);
                 else if (c == L't') { if (selectedGroup()) toTree(View::List); }
                 else if (c == L'h') { windowMin = windowMin == 60 ? 1440 : 60; engine.setWindowMin(windowMin); }

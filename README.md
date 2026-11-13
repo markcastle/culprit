@@ -2,7 +2,7 @@
 
 *Find out what's slowing your PC down, who it belongs to, and end it if you want to.*
 
-`culprit` is a small Windows command-line tool. Run it and you get a live list of what is using the machine, ranked by how much pressure each application has put on it **over time**, not just this second. Pick one to see who published it, where it lives and which account it runs as. Press `K` to end it.
+`culprit` is a small Windows command-line tool. Run it and you get a live list of what is using the machine, ranked by how much pressure each application has put on it **over time**, not just this second. Press `D` on one to see who published it, where it lives and which account it runs as. Press `K` to end it.
 
 One native exe (about 550 KB). No installer, no runtime, no admin, no network, no telemetry.
 
@@ -33,13 +33,13 @@ C:\>culprit
  Egnyte Drive                                1.9%    118 MB       9
  Task Manager                                7.2%    289 MB       6
 
- ↑↓ Select   Enter Details   K Kill   T Tree   H 1h/24h   S Sort   Q Quit
+ ↑↓ Select   D Details   K Kill   T Tree   H 1h/24h   S Sort   Q Quit
 ```
 
 | Key | What it does |
 | --- | --- |
 | `↑` `↓` `PgUp` `PgDn` | Move the selection (it stays on the same app as the list reorders) |
-| `Enter` | Details: publisher, signature, location, account, start time, parent, services |
+| `D` or `Enter` | Details: publisher, signature, location, account, start time, parent, services |
 | `T` | The real parent/child process tree for that app; pick any single process |
 | `K` | End the selected process, or it and its descendants. Always asks first |
 | `H` | Switch Impact between the last hour and the last 24 hours |
