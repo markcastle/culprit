@@ -32,7 +32,7 @@ const char* const RED   = "\x1b[38;5;203m";
 const char* const GREEN = "\x1b[38;5;78m";
 
 const char* const DASH  = "\xE2\x80\x94";  // —
-const char* const DOT   = "\xE2\x97\x8F";  // ●
+const char* const DOT   = "\xE2\x80\xA2";  // • (in every console font, unlike ●)
 const char* const MID   = "\xC2\xB7";      // ·
 
 std::string rule(size_t n) {
@@ -322,7 +322,7 @@ struct App {
         add();
 
         auto mark = [&](SortBy s, const char* name) {
-            return std::string(name) + (sort == s ? "\xE2\x96\xBE" : "");
+            return std::string(name) + (sort == s ? "\xE2\x86\x93" : "");
         };
         add(dim(clip(" " + padRight("PROCESS", nameW) + padLeft(mark(SortBy::Cpu, "CPU"), 8) +
                      padLeft(mark(SortBy::Ram, "RAM"), 10) + padLeft(mark(SortBy::Impact, "IMPACT"), 8), W)));
@@ -346,7 +346,7 @@ struct App {
             if (cells(text) + cells(imp) > W) { text = clip(text, W); imp.clear(); }
             add(std::string(sel ? SEL : "") + text + impactColor(g.impact) + imp + (sel ? " " : "") + RST);
         }
-        footer("\xE2\x86\x91\xE2\x86\x93 Select   \xE2\x86\xB5 Details   K Kill   T Tree   H 1h/24h   S Sort   Q Quit");
+        footer("\xE2\x86\x91\xE2\x86\x93 Select   Enter Details   K Kill   T Tree   H 1h/24h   S Sort   Q Quit");
     }
 
     void field(const std::string& name, const std::string& value, const char* color = "") {

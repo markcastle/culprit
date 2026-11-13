@@ -23,17 +23,17 @@ That downloads the latest release into `%LOCALAPPDATA%\Programs\culprit` and add
 ```text
 C:\>culprit
 
- CULPRIT                                                     ● LIVE
+ CULPRIT                                                     • LIVE
  Impact over the last hour  ·  42m recorded  ·  tracking on
 
- PROCESS                                      CPU       RAM IMPACT▾
+ PROCESS                                      CPU       RAM IMPACT↓
  ──────────────────────────────────────────────────────────────────
  Desktop Window Manager                      4.0%    7.2 GB      49
  Claude (16)                                 9.1%    2.2 GB      44
  Egnyte Drive                                1.9%    118 MB       9
  Task Manager                                7.2%    289 MB       6
 
- ↑↓ Select   ↵ Details   K Kill   T Tree   H 1h/24h   S Sort   Q Quit
+ ↑↓ Select   Enter Details   K Kill   T Tree   H 1h/24h   S Sort   Q Quit
 ```
 
 | Key | What it does |
